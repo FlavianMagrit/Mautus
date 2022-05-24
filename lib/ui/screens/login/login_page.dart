@@ -42,7 +42,6 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ]),
-      /*
       bottomNavigationBar: BottomAppBar(
         child: SizedBox(
           height: 50,
@@ -68,31 +67,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
-      */
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.deepPurple),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.explore, color: Colors.deepPurple),
-            label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_basket, color: Colors.deepPurple),
-            label: 'Basket',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feed, color: Colors.deepPurple),
-            label: 'Feed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: Colors.deepPurple),
-            label: 'Profile',
-          ),
-        ],
       ),
     );
   }

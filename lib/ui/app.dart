@@ -1,6 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mautus_flutter/ui/screens/leaderboard/leaderboard_page.dart';
 import 'package:mautus_flutter/ui/screens/login/login_page.dart';
 
 import '../main.dart';
@@ -16,7 +16,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(title: 'Maumau Mautus'),
+      // home: const LoginPage(title: 'Maumau Mautus'),
+      home: const LeaderBoardPage(title: 'leaderboard'),
     );
   }
 }

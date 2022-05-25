@@ -16,6 +16,32 @@ class LeaderBoardPage extends StatefulWidget {
 class _LeaderBoardPageState extends State<LeaderBoardPage> {
   @override
   Widget build(BuildContext context) {
+    String mystring = 'Michel';
+
+    List<Widget> testList = [];
+
+    for (int i = 0; i < mystring.length; i++) {
+      testList.add(
+        Container(
+            height: 50,
+            width: 50,
+            margin: const EdgeInsets.only(left: 2.0),
+            alignment: Alignment.center,
+            color: Colors.red,
+            child: TextField(
+              textAlign: TextAlign.center,
+              maxLength: 1,
+              onChanged: (value) {
+                value.length == 1 && FocusScope.of(context).nextFocus();
+              },
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                counterText: '',
+              ),
+            )),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -24,41 +50,7 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
         Column(
           children: <Widget>[
             Row(
-              children: [
-                Container(
-                    height: 50,
-                    width: 50,
-                    padding: const EdgeInsets.all(8),
-                    alignment: Alignment.center,
-                    color: Colors.red,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      onChanged: (value) {
-                        value.length == 1 && FocusScope.of(context).nextFocus();
-                      },
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        counterText: '',
-                      ),
-                    )),
-                Container(
-                    alignment: Alignment.center,
-                    color: Colors.red,
-                    height: 50,
-                    width: 50,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      maxLength: 1,
-                      onChanged: (value) {
-                        value.length == 1 && FocusScope.of(context).nextFocus();
-                      },
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        counterText: '',
-                      ),
-                    )),
-              ],
+              children: testList,
             )
           ],
         ),

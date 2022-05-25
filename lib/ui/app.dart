@@ -16,8 +16,8 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: const LoginPage(title: 'Maumau Mautus'),
-      home: const LeaderBoardPage(title: 'leaderboard'),
+      home: const LoginPage(title: 'Maumau Mautus'),
+      // home: const LeaderBoardPage(title: 'leaderboard'),
     );
   }
 }

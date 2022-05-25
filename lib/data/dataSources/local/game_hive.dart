@@ -7,7 +7,7 @@ class GameHive {
 
   static Future<GameHive> getInstance() async {
     if (_instance == null) {
-      _box = await Hive.openBox('Word');
+      _box = await Hive.openBox('Game');
       _instance = GameHive._();
     }
     return _instance!;

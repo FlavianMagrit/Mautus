@@ -9,8 +9,11 @@ class SignInAndSignUpViewModel with ChangeNotifier {
 
   Future<void> signIn({required email, required password}) async {
     UserRepository userRepository = await UserRepository.getInstance();
-    _user = await userRepository.signIn(email: email, password: password);
-    _user ??= await userRepository.signUp(email: email, password: password);
+    try {
+      _user = await userRepository.signIn(email: email, password: password);
+    } on Exception catch (_) {
+      _user ??= await userRepository.signUp(email: email, password: password);
+    }
     notifyListeners();
     return;
   }

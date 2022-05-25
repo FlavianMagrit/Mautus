@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
-import 'package:mautus_flutter/data/entities/user.dart';
 import 'package:mautus_flutter/data/entities/word.dart';
 
 part 'game.g.dart';
@@ -21,5 +21,6 @@ class Game {
   @HiveField(6)
   int? limitTries;
 
-  Game(this.beginDate, this.endDate,  this.score,  this.player,  this.word,  this.tries,  this.limitTries);
+  Game(this.beginDate, this.endDate, this.score, this.player, this.word,
+      this.tries, this.limitTries);
 }

@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hive/hive.dart';
-import 'package:mautus_flutter/data/entities/user.dart';
 
 class UserHive {
   static UserHive? _instance;

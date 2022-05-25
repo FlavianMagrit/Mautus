@@ -1,32 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'trash.dart';
+part of 'profile.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TrashAdapter extends TypeAdapter<Trash> {
+class ProfileAdapter extends TypeAdapter<Profile> {
   @override
-  final int typeId = 1;
+  final int typeId = 3;
 
   @override
-  Trash read(BinaryReader reader) {
+  Profile read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Trash(
-      (fields[0] as List?)?.cast<Word>(),
+    return Profile(
+      fields[0] as String?,
+      fields[1] as String?,
+      fields[2] as int?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Trash obj) {
+  void write(BinaryWriter writer, Profile obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.usedWords);
+      ..write(obj.email)
+      ..writeByte(1)
+      ..write(obj.pseudo)
+      ..writeByte(2)
+      ..write(obj.score);
   }
 
   @override
@@ -35,7 +41,7 @@ class TrashAdapter extends TypeAdapter<Trash> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TrashAdapter &&
+      other is ProfileAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

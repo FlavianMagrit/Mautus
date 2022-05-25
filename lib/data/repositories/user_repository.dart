@@ -4,7 +4,7 @@ import '../dataSources/firestore/user_firestore.dart';
 
 class UserRepository {
   static UserRepository? _instance;
-  static UserFirestore _userFirestore = UserFirestore.getInstance();
+  static final UserFirestore _userFirestore = UserFirestore.getInstance();
 
   static Future<UserRepository> getInstance() async {
     _instance ??= UserRepository._();

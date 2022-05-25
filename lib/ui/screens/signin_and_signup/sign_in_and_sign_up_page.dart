@@ -20,8 +20,11 @@ class _SignInSignUpPage extends State<SignInSignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
       body: Consumer<SignInAndSignUpViewModel>(
-          builder: ((context, viewModel, child) {
+        builder: ((context, viewModel, child) {
         viewModel.addListener(() {
           if (viewModel.user != null) {
             context.beamToNamed('/home');
@@ -49,12 +52,14 @@ class _SignInSignUpPage extends State<SignInSignUpPage> {
                 ),
               ),
               ElevatedButton(
-                  onPressed: () {
-                    viewModel.signIn(
-                        email: emailController.value.text,
-                        password: passwordController.value.text);
-                  },
-                  child: const Text('Valider')),
+                onPressed: () {
+                  viewModel.signIn(
+                    email: emailController.value.text,
+                    password: passwordController.value.text
+                  );
+                  passwordController.value = TextEditingValue();
+                },
+                child: const Text('Valider')),
             ],
           ),
         );

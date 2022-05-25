@@ -31,6 +31,10 @@ class UserFirestore {
     return userCredential;
   }
 
+  Future<void> signOut() async {
+    return _firebaseAuth.signOut();
+  }
+
   Future<bool> isSignedIn() async {
     return _firebaseAuth.currentUser != null;
   }

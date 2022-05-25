@@ -24,4 +24,8 @@ class UserRepository {
         await _userFirestore.signUp(email: email, password: password);
     return userCredential.user;
   }
+
+  Future<void> signOut() async {
+    return _userFirestore.signOut();
+  }
 }

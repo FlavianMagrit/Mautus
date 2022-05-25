@@ -1,10 +1,14 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mautus_flutter/ui/screens/home/home_viewmodel.dart';
 import 'package:mautus_flutter/ui/widgets/leaderboard_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/custom_bottom_nav_bar.dart';
 import '../../widgets/game_screen.dart';
 import '../../widgets/profile_screen.dart';
+import '../signin_and_signup/sign_in_and_sign_up_viewmodel.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -29,7 +33,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Text(widget.title),
+            IconButton(onPressed: () async {
+              await context.read<HomeViewModel>().signOut();
+              await context.read<SignInAndSignUpViewModel>().reset();
+              context.beamToNamed('/');
+            }, icon: Icon(Icons.logout))
+          ],
+        ),
       ),
       body: _widgets[_currentIndex],
       bottomNavigationBar: CustomBottomNavBar(onCLick: (index) {

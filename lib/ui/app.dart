@@ -10,8 +10,8 @@ class App extends StatelessWidget {
 
   final BeamerDelegate routerDelegate = BeamerDelegate(locationBuilder: RoutesLocationBuilder(
     routes: {
-      '/': (context, state, data) => SignInSignUpPage(title: 'Connexion'),
-      '/home': (context, state, data) => HomePage(title: 'Maumau Mautus',),
+      '/': (context, state, data) => const SignInSignUpPage(title: 'Connexion'),
+      '/home': (context, state, data) => const HomePage(title: 'Maumau Mautus',)
     }
   ));
 

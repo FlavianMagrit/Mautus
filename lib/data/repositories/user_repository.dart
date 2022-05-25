@@ -3,20 +3,17 @@ import '../entities/user.dart';
 
 class UserRepository {
   static UserRepository? _instance;
-  static UserHive? _userHive;
+  static UserFirestore? _userFirestore;
 
   static Future<UserRepository> getInstance() async {
-    if (_instance == null) {
-      _userHive = await UserHive.getInstance();
-      _instance = UserRepository._();
-    }
+    _instance ??= UserRepository._();
     return _instance!;
   }
 
   UserRepository._();
 
-  Future<User> insertUser(User user) async {
-    await _userHive?.insertUser(user);
-    return user;
+  Future<User?> signIn({required email, required password}) async {
+    UserCredential userCredential = await _userFirestore.signInWithCredentials(email: email, password: password);
+    return userCredential.user;
   }
 }

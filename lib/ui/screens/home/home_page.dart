@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:mautus_flutter/ui/screens/home/home_viewmodel.dart';
 import 'package:mautus_flutter/ui/widgets/leaderboard_screen.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        backgroundColor: HexColor("#013a79"),
         title: Row(
           children: [
             Text(widget.title),
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage> {
               await context.read<HomeViewModel>().signOut();
               await context.read<SignInAndSignUpViewModel>().reset();
               context.beamToNamed('/');
-            }, icon: Icon(Icons.logout))
+            }, icon: const Icon(Icons.logout)),
           ],
         ),
       ),

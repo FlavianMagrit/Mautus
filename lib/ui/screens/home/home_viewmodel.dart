@@ -1,25 +1,25 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:mautus_flutter/data/repositories/word_repository.dart';
-import '../../../data/entities/word.dart';
 import '../../../data/repositories/user_repository.dart';
 
 class HomeViewModel with ChangeNotifier {
-  Word? _word;
+  String? _word;
 
-  Word? get word => _word;
+  String? get word => _word;
 
-  Future<void> insertWord(Word word) async {
-    WordRepository repository = await WordRepository.getInstance();
-    repository.insertWord(word);
-    _word = word;
-    notifyListeners();
-  }
-
-  Future<String> loadDictionnary() async {
-    String dico = await rootBundle.loadString('assets/files/dico.txt');
-    List<String> words = dico.split("\r\n").where((element) => element.length > 4).toList();
-    return words[1];
+  Future<String?> loadDictionnary() async {
+    if (word == null) {
+      String dico = await rootBundle.loadString('assets/files/dico.txt');
+      List<String> words = dico
+          .split("\r\n")
+          .where((word) => word.length > 4 && word.length < 8)
+          .toList();
+      _word = words[Random().nextInt(words.length)];
+      notifyListeners();
+    }
+    return _word;
   }
 
   Future<void> signOut() async {

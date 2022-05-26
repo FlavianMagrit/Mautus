@@ -20,6 +20,5 @@ class SignInAndSignUpViewModel with ChangeNotifier {
 
   Future<void> reset() async {
     _user = null;
-    notifyListeners();
   }
 }

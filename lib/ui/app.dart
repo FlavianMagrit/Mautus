@@ -1,7 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:mautus_flutter/ui/screens/leaderboard/leaderboard_page.dart';
-import 'package:mautus_flutter/ui/screens/signin_and_signup/sign_in_and_sign_up_page.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'screens/home/home_page.dart';
 
@@ -10,7 +9,8 @@ class App extends StatelessWidget {
 
   final BeamerDelegate routerDelegate = BeamerDelegate(locationBuilder: RoutesLocationBuilder(
     routes: {
-      '/': (context, state, data) => const SignInSignUpPage(title: 'Connexion'),
+      // '/': (context, state, data) => const SignInSignUpPage(title: 'Connexion'),
+      '/': (context, state, data) => const HomePage(title: 'Maumau Mautus',),
       '/home': (context, state, data) => const HomePage(title: 'Maumau Mautus',)
     }
   ));
@@ -24,10 +24,11 @@ class App extends StatelessWidget {
           BeamerBackButtonDispatcher(delegate: routerDelegate),
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: HexColor("#013a79"),
       ),
       darkTheme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primaryColor: HexColor("#fed202"),
+        // primaryColor: HexColor("#fabc1b"),
       ),
     );
   }

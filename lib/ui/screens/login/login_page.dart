@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_input.dart';
@@ -19,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: HexColor("#013a79"),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Column(

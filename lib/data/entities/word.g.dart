@@ -18,17 +18,15 @@ class WordAdapter extends TypeAdapter<Word> {
     };
     return Word(
       fields[0] as String?,
-    )..activeDate = fields[1] as DateTime?;
+    );
   }
 
   @override
   void write(BinaryWriter writer, Word obj) {
     writer
-      ..writeByte(2)
-      ..writeByte(0)
-      ..write(obj.text)
       ..writeByte(1)
-      ..write(obj.activeDate);
+      ..writeByte(0)
+      ..write(obj.x);
   }
 
   @override

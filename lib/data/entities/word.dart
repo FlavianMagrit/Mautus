@@ -5,9 +5,11 @@ part 'word.g.dart';
 @HiveType(typeId: 1)
 class Word {
   @HiveField(0)
-  String? text;
-  @HiveField(1)
-  DateTime? activeDate;
+  String? x;
 
-  Word(this.text);
+
+  // @HiveField(2)
+  // DateTime? activeDate;
+
+  Word(this.x);
 }

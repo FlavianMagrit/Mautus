@@ -18,6 +18,7 @@ class WordAdapter extends TypeAdapter<Word> {
     };
     return Word(
       fields[0] as String?,
+      fields[1] as DateTime?,
     );
   }
 
@@ -26,7 +27,7 @@ class WordAdapter extends TypeAdapter<Word> {
     writer
       ..writeByte(1)
       ..writeByte(0)
-      ..write(obj.x);
+      ..write(obj.text);
   }
 
   @override

@@ -5,18 +5,19 @@ part 'word.g.dart';
 @HiveType(typeId: 1)
 class Word {
   @HiveField(0)
-  String? x;
+  String? text;
 
-  // @HiveField(2)
-  // DateTime? activeDate;
+  @HiveField(2)
+  DateTime? activeDate;
 
-  Word(this.x);
+  Word(this.text, this.activeDate);
 
-  Word.fromJson(Map<String, Object?> json) : this(json['x']! as String);
+  Word.fromJson(Map<String, Object?> json) : this(json['text']! as String, json['activeDate']! as DateTime);
 
   Map<String, String?> toJson() {
     return {
-      'x': x,
+      'text': text,
+      'activeDate': activeDate.toString(),
     };
   }
 }

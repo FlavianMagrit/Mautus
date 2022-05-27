@@ -12,4 +12,12 @@ class Profile {
   int? score;
 
   Profile(this.email, this.pseudo, this.score);
+
+  // Profile.fromJson(Map<String, Object?> json) : this(json['email']! as String);
+
+  Map<String, String?> toJson() {
+    return {
+      'email': email,
+    };
+  }
 }

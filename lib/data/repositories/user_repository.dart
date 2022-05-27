@@ -28,4 +28,14 @@ class UserRepository {
   Future<void> signOut() async {
     return _userFirestore.signOut();
   }
+
+  // Future<User> insertUser(User user) async {
+  //   await _profileHive?.insertUser(user);
+  //   return user;
+  // }
+  //
+  // Future<List<User>> getAllFromFirestore() async {
+  //   QuerySnapshot<User> users = await _userFirestore!.getAll();
+  //   return users.docs.map((e) => e.data()).toList();
+  // }
 }

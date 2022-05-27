@@ -21,12 +21,42 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text('Le mot du jour :'),
-        Text(mystring),
+        // Text(mystring),
         Consumer<HomeViewModel>(builder: (context, model, child) {
-          if (viewModel.word == null) {
-            return const CircularProgressIndicator();
+          if (viewModel.gameState == 'win') {
+            return Center(
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/pictures/win.gif",
+                      height: 125.0,
+                      width: 125.0,
+                    ),
+                    Text('Le mot du jour était'),
+                    Text(viewModel.word!),
+                  ],
+                )
+            );
+          } else if (viewModel.gameState == 'loose') {
+            return Center(
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/pictures/loose.gif",
+                      height: 125.0,
+                      width: 125.0,
+                    ),
+                    Text('Le mot du jour était'),
+                    Text(viewModel.word!),
+                  ],
+                )
+            );
           } else {
-            return CustomGrid(mystring: mystring);
+            if (viewModel.word == null) {
+              return const CircularProgressIndicator();
+            } else {
+              return CustomGrid(mystring: mystring);
+            }
           }
         })
       ]),

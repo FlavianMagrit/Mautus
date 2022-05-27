@@ -9,9 +9,11 @@ import '../../../data/repositories/user_repository.dart';
 class HomeViewModel with ChangeNotifier {
   String? _word;
   String _response = '';
+  String _gameState = 'game';
 
   String? get word => _word;
   String get response => _response;
+  String get gameState => _gameState;
 
   Future<String?> loadDictionnary() async {
     if (word == null) {
@@ -51,5 +53,11 @@ class HomeViewModel with ChangeNotifier {
       _response = _response + letter;
     }
     return _response;
+  }
+
+  String setState(String state) {
+    _gameState = state;
+    notifyListeners();
+    return _gameState;
   }
 }

@@ -1,4 +1,3 @@
-import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:mautus_flutter/ui/screens/home/home_viewmodel.dart';
@@ -9,7 +8,6 @@ class CustomLetter extends StatefulWidget {
   final String mystring;
   int letterPos;
   final int rowPos;
-  bool win = false;
   String bgcolor = '#003B79';
   CustomLetter({Key? key, required this.mystring, required this.letterPos, required this.rowPos}) : super(key: key);
 
@@ -25,10 +23,20 @@ class _CustomLetterState extends State<CustomLetter> {
       setState(() {
         widget.bgcolor = '#FBBD1B';
       });
+    } else {
+      for (int i=0 ; i<widget.mystring.length ; i++) {
+        if (letter == widget.mystring[i]) {
+          setState(() {
+            widget.bgcolor = '#FF0000';
+          });
+        }
+      }
     }
     if (widget.letterPos == widget.mystring.length-1) {
       if (widget.mystring[0] + homeViewModel.response == widget.mystring) {
-        widget.win = true;
+        homeViewModel.setState('win');
+      } else if (widget.rowPos == 4 && widget.letterPos == widget.mystring.length-1) {
+        homeViewModel.setState('loose');
       }
       homeViewModel.resetString();
     }
@@ -56,11 +64,6 @@ class _CustomLetterState extends State<CustomLetter> {
         onChanged: (value) {
           value.length == 1 && FocusScope.of(context).nextFocus();
           _checkLetter(value);
-          if (widget.win) {
-            context.beamToNamed('/win');
-          } else if (widget.rowPos == 4 && widget.letterPos == widget.mystring.length-1) {
-            context.beamToNamed('/loose');
-          }
         },
         decoration: const InputDecoration(
           border: InputBorder.none,

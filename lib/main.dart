@@ -16,7 +16,6 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        // ChangeNotifierProvider(create: (_) => MyHomeViewModel()),
         ChangeNotifierProvider(create: (_) => SignInAndSignUpViewModel()),
         ChangeNotifierProvider(create: (_) => HomeViewModel()),
       ],

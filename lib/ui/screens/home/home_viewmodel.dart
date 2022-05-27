@@ -8,8 +8,10 @@ import '../../../data/repositories/user_repository.dart';
 
 class HomeViewModel with ChangeNotifier {
   String? _word;
+  String _response = '';
 
   String? get word => _word;
+  String get response => _response;
 
   Future<String?> loadDictionnary() async {
     if (word == null) {
@@ -36,5 +38,18 @@ class HomeViewModel with ChangeNotifier {
   Future<void> signOut() async {
     UserRepository userRepository = await UserRepository.getInstance();
     return userRepository.signOut();
+  }
+
+  String resetString() {
+    return _response = '';
+  }
+
+  String incrementString(String letter) {
+    if (_response == '') {
+      _response = letter;
+    } else {
+      _response = _response + letter;
+    }
+    return _response;
   }
 }

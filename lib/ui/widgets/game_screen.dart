@@ -13,13 +13,36 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  String? response = "";
+
   @override
   Widget build(BuildContext context) {
     HomeViewModel viewModel = context.read<HomeViewModel>();
     viewModel.loadDictionnary();
-    String mystring = viewModel.word.toString();
+
+    String mystring = viewModel.word.toString().toUpperCase();
+
+    print("response: $response");
+
+    if (mystring == response) {
+      print('well done');
+    } else {
+      print('la belle mere a bea');
+    }
 
     List<Widget> lettersList = [];
+
+    void _incrementString(String letter) {
+      setState(() {
+        if (response!.length! == 0) {
+          if (mystring != 'null') {
+            response = (response! + mystring[0].toUpperCase());
+          }
+        }
+        response = response! + letter;
+        print('reponseSetState: $response');
+      });
+    }
 
     for (int i = 1; i < mystring.length; i++) {
       lettersList.add(
@@ -42,6 +65,7 @@ class _GameScreenState extends State<GameScreen> {
               ),
               onChanged: (value) {
                 value.length == 1 && FocusScope.of(context).nextFocus();
+                _incrementString(value);
               },
               decoration: const InputDecoration(
                 border: InputBorder.none,
@@ -51,9 +75,35 @@ class _GameScreenState extends State<GameScreen> {
       );
     }
 
+    // lettersList.add(Container(
+    //     height: 50,
+    //     width: 50,
+    //     margin: const EdgeInsets.only(left: 2.0),
+    //     alignment: Alignment.center,
+    //     color: HexColor("#013a79"),
+    //     child: TextField(
+    //       inputFormatters: [
+    //         UpperCaseTextFormatter(),
+    //       ],
+    //       textAlign: TextAlign.center,
+    //       maxLength: 1,
+    //       style: const TextStyle(
+    //         color: Colors.white,
+    //         fontSize: 30,
+    //         fontWeight: FontWeight.bold,
+    //       ),
+    //       onChanged: (value) {
+    //         // print(mystring);
+    //       },
+    //       decoration: const InputDecoration(
+    //         border: InputBorder.none,
+    //         counterText: '',
+    //       ),
+    //     )));
+
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Le mot du jour :'),
+        const Text('Le mot du jour :'),
         Consumer<HomeViewModel>(builder: (context, model, child) {
           if (viewModel.word == null) {
             return const CircularProgressIndicator();
@@ -62,21 +112,19 @@ class _GameScreenState extends State<GameScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  height: 50,
-                  width: 50,
-                  margin: const EdgeInsets.only(left: 2.0),
-                  alignment: Alignment.center,
-                  color: HexColor("#013a79"),
-                  child: Text(
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    '${mystring[0]}'.toUpperCase())),
-                Row(
-                  children: lettersList,
-                ),
+                    height: 50,
+                    width: 50,
+                    margin: const EdgeInsets.only(left: 2.0),
+                    alignment: Alignment.center,
+                    color: HexColor("#013a79"),
+                    child: Text(
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        '${mystring[0]}'.toUpperCase())),
+                Row(children: lettersList),
               ],
             );
           }

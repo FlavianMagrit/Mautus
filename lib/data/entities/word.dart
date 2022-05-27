@@ -12,12 +12,15 @@ class Word {
 
   Word(this.text, this.activeDate);
 
-  Word.fromJson(Map<String, Object?> json) : this(json['text']! as String, json['activeDate']! as DateTime);
+  factory Word.fromJson(Map<String, Object?> json) {
+    String? activeDate = json['activeDate'] as String?;
+    return Word(json['text']! as String, (activeDate != null) ? DateTime.parse(activeDate) : null);
+  }
 
   Map<String, String?> toJson() {
     return {
       'text': text,
-      'activeDate': activeDate.toString(),
+      'activeDate': (activeDate != null) ? activeDate.toString() : null,
     };
   }
 }

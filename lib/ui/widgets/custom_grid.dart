@@ -17,7 +17,7 @@ class _CustomGridState extends State<CustomGrid> {
 
     for (int i = 0; i < 5; i++) {
       grid.add(
-        CustomRow(mystring: widget.mystring)
+        CustomRow(mystring: widget.mystring, rowPos: i)
       );
     }
 

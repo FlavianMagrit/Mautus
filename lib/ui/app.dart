@@ -1,6 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:mautus_flutter/ui/screens/home/loose_page.dart';
+import 'package:mautus_flutter/ui/screens/home/win_page.dart';
 import 'package:mautus_flutter/ui/screens/signin_and_signup/sign_in_and_sign_up_page.dart';
 
 import 'screens/home/home_page.dart';
@@ -16,6 +18,8 @@ class App extends StatelessWidget {
           title: 'Maumau Mautus',
         ),
     '/home': (context, state, data) => const HomePage(title: 'Maumau Mautus'),
+    '/win': (context, state, data) => const WinPage(),
+    '/loose': (context, state, data) => const LoosePage(),
   }));
 
   @override

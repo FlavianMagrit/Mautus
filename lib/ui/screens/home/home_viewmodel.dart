@@ -15,7 +15,7 @@ class HomeViewModel with ChangeNotifier {
   String get response => _response;
   String get gameState => _gameState;
 
-  Future<List<String>> loadDictionary() async {
+  Future<List<String>> loadLocalDictionary() async {
     String dico = await rootBundle.loadString('assets/files/dico.txt');
     List<String> words = dico
       .split("\r\n")
@@ -35,7 +35,8 @@ class HomeViewModel with ChangeNotifier {
 
   Future<Word> loadFirestoreDictionary() async {
     WordRepository wordRepository = await WordRepository.getInstance();
-    List<Word> dictionary = await wordRepository.getAllFromFirestore();
+    List<Word> dictionary = await wordRepository.getAll();
+    dictionary.where((word) => word.text!.length > 4 && word.text!.length < 8);
     DateTime now = DateTime.now();
     DateTime currentDate = DateTime(now.year, now.month, now.day);
     for (int i=0 ; i<dictionary.length ; i++) {
@@ -44,9 +45,10 @@ class HomeViewModel with ChangeNotifier {
         break;
       }
     }
-    do {
-      _word ??= dictionary[Random().nextInt(dictionary.length)];
-    } while (_word?.activeDate != null);
+    while (_word == null || _word!.activeDate != null) {
+      _word = dictionary[Random().nextInt(dictionary.length)];
+    }
+    print(_word!);
     updateWord(_word!);
     notifyListeners();
     return _word!;
@@ -54,11 +56,11 @@ class HomeViewModel with ChangeNotifier {
 
   Future<Word> updateWord(Word word) async {
     WordRepository wordRepository = await WordRepository.getInstance();
-    // DateTime currentDate = DateTime.now();
     DateTime now = DateTime.now();
     DateTime currentDate = DateTime(now.year, now.month, now.day);
     Word wordWithDate = Word(word.text, currentDate);
     String? wordId = await searchWord(word);
+    notifyListeners();
     return wordRepository.updateWord(wordWithDate, wordId!);
   }
 

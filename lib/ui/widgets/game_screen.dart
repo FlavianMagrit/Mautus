@@ -17,7 +17,7 @@ class _GameScreenState extends State<GameScreen> {
     HomeViewModel viewModel = context.read<HomeViewModel>();
     viewModel.loadFirestoreDictionary();
     String? mystring = viewModel.word?.text.toString().toUpperCase();
-    mystring ??= " ";
+    mystring ??= ' ';
 
     List<Widget> lettersList = [];
 

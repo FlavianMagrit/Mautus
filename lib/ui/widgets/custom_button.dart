@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({Key? key, required this.buttonText}) : super(key: key);
+  CustomButton({Key? key, required this.buttonText, required this.onPressed})
+      : super(key: key);
   String buttonText;
+  var onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -10,12 +13,17 @@ class CustomButton extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(10),
       child: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Icon(
-          // <-- Icon
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white, // Background color
+        ),
+        onPressed: onPressed,
+        icon: const Icon(
           Icons.login_outlined,
         ),
-        label: Text(buttonText), // <-- Text
+        label: Text(
+          buttonText,
+          style: TextStyle(color: HexColor("#013a79")),
+        ), // <-- Text
       ),
     );
   }

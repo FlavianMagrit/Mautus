@@ -25,8 +25,8 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Column(
           children: <Widget>[
-            CustomInput(inputLabel: 'Utilisateur'),
-            CustomInput(inputLabel: 'Mot de passe',),
+            // CustomInput(inputLabel: 'Utilisateur'),
+            // CustomInput(inputLabel: 'Mot de passe',),
             TextButton(
               onPressed: () {
                 //forgot password screen

@@ -21,9 +21,9 @@ class HomeViewModel with ChangeNotifier {
       .split("\r\n")
       .where((word) => word.length > 4 && word.length < 8)
       .toList();
-    for (int i=0 ; i<dico.length ; i++) {
-      insertWord(words[i]);
-    }
+    // for (int i=0 ; i<dico.length ; i++) {
+    //   insertWord(words[i]);
+    // }
     return words;
   }
 
@@ -37,9 +37,16 @@ class HomeViewModel with ChangeNotifier {
     WordRepository wordRepository = await WordRepository.getInstance();
     List<Word> dictionary = await wordRepository.getAllFromFirestore();
     DateTime now = DateTime.now();
-    if (_word == null || _word!.activeDate != DateTime(now.year, now.month, now.day)) {
-      _word = dictionary[Random().nextInt(dictionary.length)];
+    DateTime currentDate = DateTime(now.year, now.month, now.day);
+    for (int i=0 ; i<dictionary.length ; i++) {
+      if (dictionary[i].activeDate == currentDate) {
+        _word = dictionary[i];
+        break;
+      }
     }
+    do {
+      _word ??= dictionary[Random().nextInt(dictionary.length)];
+    } while (_word?.activeDate != null);
     updateWord(_word!);
     notifyListeners();
     return _word!;

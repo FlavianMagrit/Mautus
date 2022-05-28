@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onPressed: () async {
           await context.read<HomeViewModel>().signOut();
           await context.read<SignInAndSignUpViewModel>().reset();
-          context.beamToNamed('/');
+          context.beamToNamed('/login');
         },
         buttonColor: '#013a79',
         textColor: '#FFFFFF',

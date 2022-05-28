@@ -15,6 +15,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     HomeViewModel viewModel = context.read<HomeViewModel>();
+    // viewModel.loadLocalDictionary();
     viewModel.loadFirestoreDictionary();
     String? mystring = viewModel.word?.text;
     mystring ??= 'chien';
@@ -58,7 +59,14 @@ class _GameScreenState extends State<GameScreen> {
             if (viewModel.word == null) {
               return const CircularProgressIndicator();
             } else {
-              return CustomGrid(mystring: mystring!);
+              return Container(
+                child: Column(
+                  children: [
+                    Text('Le mot du jour :'),
+                    CustomGrid(mystring: mystring!),
+                  ],
+                ),
+              );
             }
           }
         })

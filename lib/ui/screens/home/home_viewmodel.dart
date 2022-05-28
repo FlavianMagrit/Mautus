@@ -21,9 +21,10 @@ class HomeViewModel with ChangeNotifier {
       .split("\r\n")
       .where((word) => word.length > 4 && word.length < 8)
       .toList();
-    // for (int i=0 ; i<dico.length ; i++) {
-    //   insertWord(words[i]);
-    // }
+    words.shuffle(Random());
+    for (int i=0 ; i<100 ; i++) {
+      insertWord(words[i]);
+    }
     return words;
   }
 

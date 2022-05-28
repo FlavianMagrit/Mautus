@@ -7,34 +7,67 @@ import '../../../data/entities/word.dart';
 import '../../../data/repositories/user_repository.dart';
 
 class HomeViewModel with ChangeNotifier {
-  String? _word;
+  Word? _word;
   String _response = '';
   String _gameState = 'game';
 
-  String? get word => _word;
+  Word? get word => _word;
   String get response => _response;
   String get gameState => _gameState;
 
-  Future<String?> loadDictionnary() async {
-    if (word == null) {
-      String dico = await rootBundle.loadString('assets/files/dico.txt');
-      List<String> words = dico
-        .split("\r\n")
-        .where((word) => word.length > 4 && word.length < 8)
-        .toList();
-      _word = words[Random().nextInt(words.length)];
-      insertWord(_word!);
-      print(_word);
-      notifyListeners();
-    }
-    return _word;
+  Future<List<String>> loadLocalDictionary() async {
+    String dico = await rootBundle.loadString('assets/files/dico.txt');
+    List<String> words = dico
+      .split("\r\n")
+      .where((word) => word.length > 4 && word.length < 8)
+      .toList();
+    // for (int i=0 ; i<dico.length ; i++) {
+    //   insertWord(words[i]);
+    // }
+    return words;
   }
 
   Future<Word> insertWord(String word) async {
-    DateTime currentDate = DateTime(2022, 5, 27);
-    Word newWord = Word(word, currentDate);
     WordRepository wordRepository = await WordRepository.getInstance();
+    Word newWord = Word(word, null);
     return wordRepository.insertWord(newWord);
+  }
+
+  Future<Word> loadFirestoreDictionary() async {
+    WordRepository wordRepository = await WordRepository.getInstance();
+    List<Word> dictionary = await wordRepository.getAll();
+    dictionary.where((word) => word.text!.length > 4 && word.text!.length < 8);
+    DateTime now = DateTime.now();
+    DateTime currentDate = DateTime(now.year, now.month, now.day);
+    for (int i=0 ; i<dictionary.length ; i++) {
+      if (dictionary[i].activeDate == currentDate) {
+        _word = dictionary[i];
+        break;
+      }
+    }
+    while (_word == null || _word!.activeDate != null) {
+      _word = dictionary[Random().nextInt(dictionary.length)];
+    }
+    print(_word!);
+    updateWord(_word!);
+    notifyListeners();
+    return _word!;
+  }
+
+  Future<Word> updateWord(Word word) async {
+    WordRepository wordRepository = await WordRepository.getInstance();
+    DateTime now = DateTime.now();
+    DateTime currentDate = DateTime(now.year, now.month, now.day);
+    Word wordWithDate = Word(word.text, currentDate);
+    String? wordId = await searchWord(word);
+    notifyListeners();
+    return wordRepository.updateWord(wordWithDate, wordId!);
+  }
+
+  Future<String?> searchWord(Word word) async {
+    WordRepository wordRepository = await WordRepository.getInstance();
+    String? wordId = await wordRepository.getWordId(word.text!);
+    return wordId;
   }
 
   Future<void> signOut() async {

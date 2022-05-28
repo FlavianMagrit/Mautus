@@ -26,7 +26,24 @@ class WordRepository {
     return word;
   }
 
-  Future<List<Word>> getAllFromFirestore() async {
+  Future<Word> updateWord(Word word, String id) async {
+    // await _wordHive?.updateWord(word, id);
+    await _wordFirestore?.updateWord(word, id);
+    return word;
+  }
+
+  Future<QuerySnapshot<Word>?> searchWord(String word) async {
+    // return await _wordHive?.searchWords(word);
+    return await _wordFirestore?.searchWords(word);
+  }
+  
+  Future<String?> getWordId(String word) async {
+    // return await _wordHive?.getWordId(word);
+    return await _wordFirestore?.getWordId(word);
+  }
+
+  Future<List<Word>> getAll() async {
+    // QuerySnapshot<Word> words = await _wordHive!.getAll();
     QuerySnapshot<Word> words = await _wordFirestore!.getAll();
     return words.docs.map((e) => e.data()).toList();
   }

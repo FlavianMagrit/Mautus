@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mautus_flutter/data/entities/word.dart';
 
 class Wordfirestore {
-  static FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  static final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   static Wordfirestore? _instance;
 
   static late final CollectionReference<Word> _wordRef;
@@ -30,15 +30,26 @@ class Wordfirestore {
   }
 
   Future<QuerySnapshot<Word>> searchWords(String word) async {
-    return _wordRef.where('x', isEqualTo: 1).get();
+    return _wordRef.where('text', isEqualTo: word).get();
   }
 
-  Future<void> deleteWord(String id) async {
-    return _wordRef.doc(id).delete();
+  Future<String> getWordId(String word) async {
+    String wordId = '';
+    QuerySnapshot<Word> test = await _wordRef.get();
+    test.docs.forEach((element) {
+      if (element.data().text == word) {
+        wordId = element.id;
+      }
+    });
+    return wordId;
   }
 
   Future<void> updateWord(Word word, String id) async {
     return _wordRef.doc(id).update(word.toJson());
+  }
+
+  Future<void> deleteWord(String id) async {
+    return _wordRef.doc(id).delete();
   }
 
   Future<QuerySnapshot<Word>> getAll() async {

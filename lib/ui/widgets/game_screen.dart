@@ -19,39 +19,41 @@ class _GameScreenState extends State<GameScreen> {
     String? mystring = viewModel.word?.text.toString().toUpperCase();
     mystring ??= ' ';
 
+    print('mystring: $mystring');
+
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text('Le mot du jour :'),
-        // Text(mystring),
         Consumer<HomeViewModel>(builder: (context, model, child) {
           if (viewModel.gameState == 'win') {
             return Center(
                 child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/pictures/win.gif",
-                      height: 125.0,
-                      width: 125.0,
-                    ),
-                    Text('Le mot du jour était'),
-                    Text(viewModel.word!.text!),
-                  ],
-                )
-            );
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(bottom: 15.0),
+                  child: Text('LEEEEESSSSGGGGOOOOO',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                ),
+                Image.asset(
+                  "assets/pictures/win.gif",
+                  height: 350.0,
+                  width: 350.0,
+                ),
+              ],
+            ));
           } else if (viewModel.gameState == 'loose') {
             return Center(
                 child: Column(
-                  children: [
-                    Image.asset(
-                      "assets/pictures/loose.gif",
-                      height: 125.0,
-                      width: 125.0,
-                    ),
-                    Text('Le mot du jour était'),
-                    Text(viewModel.word!.text!),
-                  ],
-                )
-            );
+              children: [
+                Text('Le mot du jour était:'),
+                Text(viewModel.word!.text!.toUpperCase()),
+                Image.asset(
+                  "assets/pictures/loose.gif",
+                  height: 400.0,
+                  width: 400.0,
+                ),
+              ],
+            ));
           } else {
             if (viewModel.word == null) {
               return const CircularProgressIndicator();

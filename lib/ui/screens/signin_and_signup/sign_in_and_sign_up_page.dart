@@ -61,6 +61,8 @@ class _SignInSignUpPage extends State<SignInSignUpPage> {
                       password: passwordController.value.text);
                   passwordController.value = TextEditingValue();
                 },
+                buttonColor: '#FFFFFF',
+                textColor: '#013a79',
               ),
             ],
           ),

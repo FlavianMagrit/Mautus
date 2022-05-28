@@ -45,10 +45,12 @@ class HomeViewModel with ChangeNotifier {
         break;
       }
     }
-    while (_word == null || _word!.activeDate != null) {
-      _word = dictionary[Random().nextInt(dictionary.length)];
+    if (_word == null) {
+      while (_word == null || _word!.activeDate != null) {
+        _word = dictionary[Random().nextInt(dictionary.length)];
+      }
     }
-    print(_word!);
+    print(_word!.text);
     updateWord(_word!);
     notifyListeners();
     return _word!;
@@ -92,5 +94,14 @@ class HomeViewModel with ChangeNotifier {
     _gameState = state;
     notifyListeners();
     return _gameState;
+  }
+
+  String removeDiacritics(String str) {
+    var withDia = 'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var withoutDia = 'AAAAAAAAAAAAOOOOOOOOOOOOOEEEEEEEEECCDIIIIIIIIUUUUUUUUNNSSYYYZZ';
+    for (int i = 0; i < withDia.length; i++) {
+      str = str.replaceAll(withDia[i], withoutDia[i]);
+    }
+    return str;
   }
 }

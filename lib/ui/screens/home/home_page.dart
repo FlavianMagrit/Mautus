@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(onPressed: () async {
               await context.read<HomeViewModel>().signOut();
               await context.read<SignInAndSignUpViewModel>().reset();
-              context.beamToNamed('/');
+              context.beamToNamed('/login');
             }, icon: const Icon(Icons.logout)),
           ],
         ),

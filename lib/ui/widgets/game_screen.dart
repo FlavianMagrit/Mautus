@@ -16,10 +16,10 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     HomeViewModel viewModel = context.read<HomeViewModel>();
     viewModel.loadFirestoreDictionary();
-    String? mystring = viewModel.word?.text.toString().toUpperCase();
-    mystring ??= ' ';
-
-    print('mystring: $mystring');
+    String? mystring = viewModel.word?.text;
+    mystring ??= 'chien';
+    mystring = viewModel.removeDiacritics(mystring).toUpperCase();
+    print(mystring);
 
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -19,8 +19,6 @@ class _GameScreenState extends State<GameScreen> {
     String? mystring = viewModel.word?.text.toString().toUpperCase();
     mystring ??= ' ';
 
-    List<Widget> lettersList = [];
-
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text('Le mot du jour :'),
@@ -36,7 +34,7 @@ class _GameScreenState extends State<GameScreen> {
                       width: 125.0,
                     ),
                     Text('Le mot du jour était'),
-                    Text(viewModel.word!),
+                    Text(viewModel.word!.text!),
                   ],
                 )
             );
@@ -50,7 +48,7 @@ class _GameScreenState extends State<GameScreen> {
                       width: 125.0,
                     ),
                     Text('Le mot du jour était'),
-                    Text(viewModel.word!),
+                    Text(viewModel.word!.text!),
                   ],
                 )
             );
